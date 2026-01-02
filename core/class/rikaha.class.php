@@ -2168,7 +2168,8 @@ class rikaha extends eqLogic {
       );
     }
 
-    private function defStoveTemplate($type=NULL){
+    //private function defStoveTemplate($type=NULL){
+    private static function defStoveTemplate($type=NULL){
       $stoveTemplate=array(
         'standard'=>array(
           'local_statusCalculate'        => array('visible'=>1, 'historized'=>0, 'order'=>1, 'icon'=>'<i class="fas fa-fire"></i>'),
@@ -2245,13 +2246,15 @@ class rikaha extends eqLogic {
       return true;
     }
 
-    public function getStoveTemplateList(){
+    //public function getStoveTemplateList(){
+    public static function getStoveTemplateList(){
       $stoveTemplate=rikaha::defStoveTemplate();
       $stoveTemplateList=array_keys($stoveTemplate);
       return $stoveTemplateList;
     }
 
-    public function getStoveBrandList(){
+    //public function getStoveBrandList(){
+    public static function getStoveBrandList(){
       $stovebrandList=array();
       foreach (rikaha::$_StoveBrand as $key => $value) {
         $stovebrandList[]=array('id'=>$value['id'], 'label'=>$value['label']);
@@ -2478,7 +2481,8 @@ class rikaha extends eqLogic {
         }
         return false;
       }
-      if(strstr($data, 'OK')===false){
+      //if(strstr($data, 'OK')===false){
+      if(!is_array($data) && strstr($data, 'OK')===false){
         log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Write stove request FAILED: ' . $return);
         return false;
       }
