@@ -24,14 +24,31 @@ $eqLogics = eqLogic::byType($plugin->getId());
 	<div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
 		<legend><i class="fa fa-cog"></i>  {{Gestion}}</legend>
 		<div class="eqLogicThumbnailContainer">
-			<div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
-				<center><i class="fa fa-plus-circle" style="font-size : 6em;color:#94ca02;"></i></center>
+			<div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;" >
+				<center><i class="fa fa-plus-circle" style="font-size : 4em;color:#94ca02;"></i></center>
 			<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;;color:#94ca02"><center>{{Ajouter}}</center></span>
 			</div>
-			<div class="cursor eqLogicAction" data-action="gotoPluginConf" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;">
-				<center><i class="fa fa-wrench" style="font-size : 6em;color:#767676;"></i></center>
+			
+			<div class="cursor eqLogicAction" data-action="gotoPluginConf" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;">
+				<center><i class="fa fa-wrench" style="font-size : 4em;color:#767676;"></i></center>
 				<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Configuration}}</center></span>
 			</div>
+			
+			<div class="cursor eqLogicAction" onclick="window.open('https://bodbod44.github.io/jeedom-rikaha/fr_FR/', '_blank');" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;">
+				<center><i class="fa fa-book-open" style="font-size : 4em;color:#767676;"></i></center>
+				<span style="font-size : 1.1em;position:relative; top : 15px;word-break: normal;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Documentation plugin}}</center></span>
+			</div>
+			
+			<div class="cursor eqLogicAction" onclick="window.open('https://www.rika.fr/downloads', '_blank');" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;">
+				<center><i class="fa fa-book-reader" style="font-size : 4em;color:#767676;"></i></center>
+				<span style="font-size : 1.1em;position:relative; top : 15px;word-break: normal;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Manuels utilisateur}}</center></span>
+			</div>
+			
+			<div class="cursor eqLogicAction" onclick="window.open('https://community.jeedom.com/tag/plugin-rikaha', '_blank');" style="background-color : #ffffff; height : 140px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 140px;margin-left : 10px;">
+				<center><i class="fa fa-ambulance" style="font-size : 4em;color:#767676;"></i></center>
+				<span style="font-size : 1.1em;position:relative; top : 15px;word-break: break-all;white-space: pre-wrap;word-wrap: break-word;color:#767676"><center>{{Assistance}}</center></span>
+			</div>
+			
 		</div>
 		<legend><i class="fa fa-bolt"></i>  {{Mes poêles}}</legend>
 		<div class="eqLogicThumbnailContainer">
@@ -69,6 +86,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 						<form class="form-horizontal">
 						<fieldset>
 							<legend><i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"></i> {{Général}}<i class='fa fa-cogs eqLogicAction pull-right cursor' data-action='configure'></i></legend>
+							
 						<div class="form-group">
 							<label class="col-md-4 control-label">{{Nom du poêle}}</label>
 							<div class="col-md-8">
@@ -76,6 +94,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<input type="text" class="eqLogicAttr form-control" data-l1key="name" placeholder="{{Nom du poêle}}"/>
 							</div>
 						</div>
+						
 						<div class="form-group">
 							<label class="col-md-4 control-label" >{{Objet parent}}</label>
 							<div class="col-md-8">
@@ -89,6 +108,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								</select>
 							</div>
 						</div>
+						
 						<div class="form-group">
 							<label class="col-sm-4 control-label">{{Catégorie}}</label>
 							<div class="col-sm-8">
@@ -101,6 +121,7 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								?>
 							</div>
 						</div>
+						
 						<div class="form-group">
 							<label class="col-md-4 control-label"></label>
 							<div class="col-md-8">
@@ -108,18 +129,21 @@ $eqLogics = eqLogic::byType($plugin->getId());
 								<label class="checkbox-inline"><input type="checkbox" class="eqLogicAttr" data-l1key="isVisible" checked/>{{Visible}}</label>
 							</div>
 						</div>
+						
 						<div class="form-group">
 								<label class="col-md-4 control-label">{{Identifiant}}</label>
 								<div class="col-md-8">
 										<input type="text" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="login" placeholder="Identifiant"/>
 								</div>
 						</div>
+						
 						<div class="form-group">
 								<label class="col-md-4 control-label">{{Mot de passe}}</label>
 								<div class="col-md-8">
 										<input type="password" class="eqLogicAttr configuration form-control" data-l1key="configuration" data-l2key="password" placeholder="Mot de passe"/>
 								</div>
 						</div>
+						
 						<div class="form-group">
 							<label class="col-md-4 control-label">{{Numéro du poêle}}</label>
 							<div class="col-md-8">
@@ -127,57 +151,71 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							</div>
 						</div>
 
-            <div class="form-group">
-              <label class="col-md-4 control-label">{{Marque du poêle}}</label>
-              <div class="col-md-8">
-                <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="stovebrand">
-                  <?php
-                    $StoveBrandList=rikaha::getStoveBrandList();
-                    for($i=0;$i<count($StoveBrandList);$i++){
-                      echo '<option value="' . $StoveBrandList[$i]['id'] . '">' . $StoveBrandList[$i]['label'] . '</option>';
-                    }
-                  ?>
-                </select>
-              </div>
-            </div>
+						<div class="form-group">
+						  <label class="col-md-4 control-label">{{Marque du poêle}}</label>
+						  <div class="col-md-8">
+							<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="stovebrand">
+							  <?php
+								$StoveBrandList=rikaha::getStoveBrandList();
+								for($i=0;$i<count($StoveBrandList);$i++){
+								  echo '<option value="' . $StoveBrandList[$i]['id'] . '">' . $StoveBrandList[$i]['label'] . '</option>';
+								}
+							  ?>
+							</select>
+						  </div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-md-4 control-label">{{Fréquence de rafraichissement}}</label>
+							<div class="col-md-8">
+								<select class="eqLogicAttr" data-l1key="configuration" data-l2key="Freq_value" title="Fréquence de rafaichissement des statuts depuis le cloud (10 min par défaut)"  style="width:100px;">
+									<option value="0">Off</option>
+									<option value="5">5 min</option>
+									<option value="10">10 min</option>
+									<option value="15">15 min</option>
+									<option value="20">20 min</option>
+									<option value="30">30 min</option>
+								</select>
+							</div>
+						</div>
+						
+						<div class="form-group">
+						  <label class="col-md-4 control-label">{{Capacité du réservoir (Kg)}}</label>
+						  <div class="col-md-8">
+							<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="tankcapacity" placeholder="Capacité du réservoir à pellet"/>
+							{{Permet de gérer des alertes en fonction du niveau de pellet restant. Saisissez 0 pour désactiver cette fonctionnalité. Ne fonctionne que si la conso totale est historisée}}
+						  </div>
+						</div>
 
-            <div class="form-group">
-              <label class="col-md-4 control-label">{{Capacité du réservoir (Kg)}}</label>
-              <div class="col-md-8">
-                <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="tankcapacity" placeholder="Capacité du réservoir à pellet"/>
-                {{Permet de gérer des alertes en fonction du niveau de pellet restant. Saisissez 0 pour désactiver cette fonctionnalité. Ne fonctionne que si la conso totale est historisée}}
-              </div>
-            </div>
+						<div class="form-group">
+						  <label class="col-md-4 control-label">{{Poids d'un sac de pellet (Kg)}}</label>
+						  <div class="col-md-8">
+							<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="bagcapacity" placeholder="Poids d'un sac de pellet"/>
+							{{Permet de gérer le remplissage du réservoir au sac. Saisissez 0 pour désactiver cette fonctionnalité. Ne fonctionne que si la conso totale est historisée}}
+						  </div>
+						</div>
 
-            <div class="form-group">
-              <label class="col-md-4 control-label">{{Poids d'un sac de pellet (Kg)}}</label>
-              <div class="col-md-8">
-                <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="bagcapacity" placeholder="Poids d'un sac de pellet"/>
-                {{Permet de gérer le remplissage du réservoir au sac. Saisissez 0 pour désactiver cette fonctionnalité. Ne fonctionne que si la conso totale est historisée}}
-              </div>
-            </div>
+						<div class="form-group">
+						  <label class="col-md-4 control-label">{{Correction de la consommation (%)}}</label>
+						  <div class="col-md-8">
+							<input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="correctionrate" placeholder="Correction de la consommation"/>
+							{{Permet de corriger la consommation calculée en applicant un poucentage (-99 à 100). Par exemple, si vous saisissez 30, la consommation sera majoré de 30 %. Ne fonctionne que si la conso totale est historisée}}
+						  </div>
+						</div>
 
-            <div class="form-group">
-              <label class="col-md-4 control-label">{{Correction de la consommation (%)}}</label>
-              <div class="col-md-8">
-                <input type="text" class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="correctionrate" placeholder="Correction de la consommation"/>
-                {{Permet de corriger la consommation calculée en applicant un poucentage (-99 à 100). Par exemple, si vous saisissez 30, la consommation sera majoré de 30 %. Ne fonctionne que si la conso totale est historisée}}
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label class="col-md-4 control-label">{{Template du widget}}</label>
-              <div class="col-md-8">
-                <select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="templateid">
-                  <?php
-                    $templateList=rikaha::getStoveTemplateList();
-                    for($i=0;$i<count($templateList);$i++){
-                      echo '<option value="' . $templateList[$i] . '">' . $templateList[$i] . '</option>';
-                    }
-                  ?>
-                </select>
-              </div>
-            </div>
+						<div class="form-group">
+						  <label class="col-md-4 control-label">{{Template du widget}}</label>
+						  <div class="col-md-8">
+							<select class="eqLogicAttr form-control" data-l1key="configuration" data-l2key="templateid">
+							  <?php
+								$templateList=rikaha::getStoveTemplateList();
+								for($i=0;$i<count($templateList);$i++){
+								  echo '<option value="' . $templateList[$i] . '">' . $templateList[$i] . '</option>';
+								}
+							  ?>
+							</select>
+						  </div>
+						</div>
 					</fieldset>
 					</form>
 				</div>

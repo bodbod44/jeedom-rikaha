@@ -36,94 +36,52 @@ class rikaha extends eqLogic {
                   'urllogout'=>'https://www.animo-wifire.com/web/logout')
     );
     /*     * ***********************Methode static*************************** */
-    /*
+    
     public static function cron() {
       log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      
+      
 
-      foreach (eqLogic::byType('rikaha') as $rikaha) {
-        $rikaha->getInfo();
-        //$rikaha->calcTankLevel();
-        // Dashboard
-        $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
-        $mc->remove();
-        $rikaha->toHtml('dashboard');
-        $rikaha->refreshWidget();
-      }
+      foreach (eqLogic::byType('rikaha') as $rikaha) { // Parcourir tous les équipements (poeles)
+          
+        // Vérification de la fréquence de mise à jour
+        $Freq_value = $rikaha->getConfiguration('Freq_value', 10) ; // Toutes les 10 min par défaut
+        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Name='.$rikaha->getName().' Freq_value='.$Freq_value);
+        
+        if( $Freq_value > 0  ){ // Si param != off
+            if( ( date("i") % $Freq_value ) == 0 ){ // Si on tombe bien sur le x minute
+              log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called C EST MOI');
+          
+              $rikaha->getInfo();
+              $rikaha->calcTankLevel();
+              // Dashboard
+              $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
+              $mc->remove();
+              $rikaha->toHtml('dashboard');
+              $rikaha->refreshWidget();
+            } // modulo
+        } // if > 0
+      } // foreach
     }
-    */
-    public static function cron5() {
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+    
+    
+    /*public static function cron5() {
+    }*/
 
-      foreach (eqLogic::byType('rikaha') as $rikaha) {
-        $rikaha->getInfo();
-        $rikaha->calcTankLevel();
-        // Dashboard
-        $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
-        $mc->remove();
-        $rikaha->toHtml('dashboard');
-        $rikaha->refreshWidget();
-      }
-    }
+    /*public static function cron10() {
+    }*/
 
-    public static function cron10() {
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+    /*public static function cron15() {
+    }*/
 
-      foreach (eqLogic::byType('rikaha') as $rikaha) {
-        $rikaha->getInfo();
-        $rikaha->calcTankLevel();
-        // Dashboard
-        $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
-        $mc->remove();
-        $rikaha->toHtml('dashboard');
-        $rikaha->refreshWidget();
-      }
-    }
+    /*public static function cron30() {
+    }*/
 
-    public static function cron15() {
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
-
-      foreach (eqLogic::byType('rikaha') as $rikaha) {
-        $rikaha->getInfo();
-        $rikaha->calcTankLevel();
-        // Dashboard
-        $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
-        $mc->remove();
-        $rikaha->toHtml('dashboard');
-        $rikaha->refreshWidget();
-      }
-    }
-
-    public static function cron30() {
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
-
-      foreach (eqLogic::byType('rikaha') as $rikaha) {
-        $rikaha->getInfo();
-        $rikaha->calcTankLevel();
-        // Dashboard
-        $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
-        $mc->remove();
-        $rikaha->toHtml('dashboard');
-        $rikaha->refreshWidget();
-      }
-    }
-
-    public static function cronHourly() {
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
-
-      foreach (eqLogic::byType('rikaha') as $rikaha) {
-        $rikaha->getInfo();
-        $rikaha->calcTankLevel();
-        // Dashboard
-        $mc = cache::byKey('rikahaWidgetdashboard' . $rikaha->getId());
-        $mc->remove();
-        $rikaha->toHtml('dashboard');
-        $rikaha->refreshWidget();
-      }
-    }
-    /*
-    public static function cronDaily() {
-    }
-    */
+    /*public static function cronHourly() {
+    }*/
+    
+    /*public static function cronDaily() {
+    }*/
 
     /*     * *********************Méthodes d'instance************************* */
     private function getStoveStructure(&$stoveStructure){
