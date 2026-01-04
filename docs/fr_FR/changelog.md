@@ -4,6 +4,10 @@ Vous retrouverez le détail complet des mises à jour sur https://github.com/bod
 
 Liste des évolutions majeures de la version courante :
 
+# 04/01/2026 (beta)
+- Optimisation et agrégation des 3 fonctions getStoveBrandUrl*
+- Vérification que l'équipement est bien activé dans jeedom pour aller récupérer la mise à jour des données
+
 # 03/01/2026 (beta)
 - Corrections pour Debian12
   - Passage de 3 fonctions en static ([Signalement](https://community.jeedom.com/t/compatibilite-rikaha-debian-12/130063/5))
@@ -14,6 +18,13 @@ Liste des évolutions majeures de la version courante :
 - Ajout d'une icône "Assistance" dans la page de configuration (qui redirige vers https://community.jeedom.com/tag/plugin-rikaha)
 - Remise en forme du changelog
 - Modification du info.json (pour changer les liens vers la doc et le changelog)
+
+# 02/01/2026 (beta)
+---
+---
+Création du fork
+---
+---
 
 # 20/01/2022 (stable)
 - Ajout de la possibilité de gérer les poêles de la marque Animo (filiale de Rika).
