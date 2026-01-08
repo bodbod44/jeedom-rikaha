@@ -38,13 +38,13 @@ class rikaha extends eqLogic {
     /*     * ***********************Methode static*************************** */
     
     public static function cron() {
-      //log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      //log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
 
       foreach (eqLogic::byType('rikaha') as $rikaha) { // Parcourir tous les équipements (poeles)
           
         // Vérification de la fréquence de mise à jour
         $Freq_value = $rikaha->getConfiguration('Freq_value', 10) ; // Toutes les 10 min par défaut        
-        //log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Name='.$rikaha->getName().' Freq_value='.$Freq_value);
+        //log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Name='.$rikaha->getName().' Freq_value='.$Freq_value);
         
         if( $Freq_value > 0 && $rikaha->getIsEnable() == 1  ){ // Si param != off ET équipement actif
             if( ( date("i") % $Freq_value ) == 0 ){ // Si on tombe bien sur le x minute
@@ -81,7 +81,7 @@ class rikaha extends eqLogic {
 
     /*     * *********************Méthodes d'instance************************* */
     private function getStoveStructure(&$stoveStructure){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
 
       $stoveStructure=array(
         //name
@@ -2217,39 +2217,15 @@ class rikaha extends eqLogic {
     }
 
     private function getStoveBrandUrl($id=0 , $type = ''){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrl($id='.$id.' , $type='.$type.') Called' );  
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' getStoveBrandUrl($id='.$id.' , $type='.$type.') Called' );  
 
       $url = isset(rikaha::$_StoveBrand[$id][$type]) ? rikaha::$_StoveBrand[$id][$type] : false ;
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrl() url '.($url == false ? 'NOT FOUND (false)' : ('found ('.$url.')')) );
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' getStoveBrandUrl() url '.($url == false ? 'NOT FOUND (false)' : ('found ('.$url.')')) );
       return $url ;
     }
-/*
-    private function getStoveBrandUrlLogin($id=0){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrlLogin($id='.$id.') Called' );  
-
-      $url = array_key_exists($id , rikaha::$_StoveBrand) ? rikaha::$_StoveBrand[$id]['urllogin'] : false ;
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrlLogin($id='.$id.') url '.($url == false ? 'NOT FOUND (false)' : ('found ('.$url.')')) );
-      return $url ;
-    }
-
-    private function getStoveBrandUrlApi($id=0){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrlApi($id='.$id.') Called');
-      
-      $url = array_key_exists($id , rikaha::$_StoveBrand) ? rikaha::$_StoveBrand[$id]['urlapi'] : false ;
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrlApi($id='.$id.') url '.($url == false ? 'NOT FOUND (false)' : ('found ('.$url.')')) );
-      return $url ;
-    }
-
-    private function getStoveBrandUrlLogout($id=0){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrlLogout($id='.$id.') Called');
-      
-      $url = array_key_exists($id , rikaha::$_StoveBrand) ? rikaha::$_StoveBrand[$id]['urllogout'] : false ;
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrlLogout($id='.$id.') url '.($url == false ? 'NOT FOUND (false)' : ('found ('.$url.')')) );
-      return $url ;
-    }*/
 
     private function cleanCookieFile($cookieFile){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
 
       if (file_exists($cookieFile)===true){
         unlink($cookieFile);
@@ -2257,7 +2233,7 @@ class rikaha extends eqLogic {
     }
 
     private function cleanJsonFile($jsonFile){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
 
       if (file_exists($jsonFile)===true){
         unlink($jsonFile);
@@ -2265,16 +2241,16 @@ class rikaha extends eqLogic {
     }
 
     private function rikaLogin($cookieFile){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
 
       if($this->checkCookie($cookieFile)===true){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Session OK passe login');
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Session OK passe login');
         return true;
       }
       //$url=$this->getStoveBrandUrlLogin($this->getConfiguration('stovebrand'));
       $url=$this->getStoveBrandUrl($this->getConfiguration('stovebrand') , 'urllogin');
       if($url===false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrl(urllogin) FAILED');
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' getStoveBrandUrl(urllogin) FAILED');
         //$url='https://www.rika-firenet.com/web/login';
         $url=$this->getStoveBrandUrl( 0 , 'urllogin');
         #return false;
@@ -2312,31 +2288,31 @@ class rikaha extends eqLogic {
 
       curl_close($ch);
 
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' return value: \''.$return.'\'');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' return value: \''.$return.'\'');
       if($curl_errno > 0){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' FAILED rikaLogin URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' FAILED rikaLogin URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
         foreach ($curl_info as $key => $value) {
-          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' .  $key . ': ' . $value);
+          log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' ' .  $key . ': ' . $value);
         }
         return false;
       }elseif(trim($return)!='Found. Redirecting to /web/summary'){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' auth FAILED check your login/password');
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' auth FAILED check your login/password');
         return false;
       }
       return true;
     }
 
     private function rikaStatus($cookieFile, $jsonFile){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
       $fp = fopen ($jsonFile,"w");
       if ($fp === false) {
-        log::add('rikaha', 'error', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to open json file');
+        log::add('rikaha', 'error', __METHOD__.'(ln '.__LINE__.')'.' Failed to open json file');
         return false;
       }
       //$url=$this->getStoveBrandUrlApi($this->getConfiguration('stovebrand'));
       $url=$this->getStoveBrandUrl($this->getConfiguration('stovebrand') , 'urlapi' );
       if($url===false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrl(urlapi) FAILED');
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' getStoveBrandUrl(urlapi) FAILED');
         //$url='https://www.rika-firenet.com/api/client/';
         $url=$this->getStoveBrandUrl( 0 , 'urlapi' );
         #return false;
@@ -2365,9 +2341,9 @@ class rikaha extends eqLogic {
       fclose($fp);
 
       if($curl_errno > 0){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' FAILED rikaStatus URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' FAILED rikaStatus URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
         foreach ($curl_info as $key => $value) {
-          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' .  $key . ': ' . $value);
+          log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' ' .  $key . ': ' . $value);
         }
         return false;
       }
@@ -2376,22 +2352,22 @@ class rikaha extends eqLogic {
     }
 
     private function rikaControls($cookieFile='', $data=''){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
       if(trim($data=='')){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' POST fields not valid');
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' POST fields not valid');
         return false;
       }
       //$url=$this->getStoveBrandUrlApi($this->getConfiguration('stovebrand'));
       $url=$this->getStoveBrandUrl($this->getConfiguration('stovebrand') , 'urlapi' );
       if($url===false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrl(urlapi) FAILED');
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' getStoveBrandUrl(urlapi) FAILED');
         //$url = 'https://www.rika-firenet.com/api/client/';
         $url=$this->getStoveBrandUrl( 0 , 'urlapi' );
         #return false;
       }
 
       $postfields=http_build_query($data, "\n");
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' . $postfields);
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' ' . $postfields);
 
       $ch = curl_init();
       curl_setopt($ch, CURLOPT_FRESH_CONNECT, TRUE);
@@ -2419,30 +2395,30 @@ class rikaha extends eqLogic {
 
       curl_close($ch);
 
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' . $return);
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' ' . $return);
 
       if($curl_errno > 0){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' FAILED rikaControls URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' FAILED rikaControls URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
         foreach ($curl_info as $key => $value) {
-          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' .  $key . ': ' . $value);
+          log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' ' .  $key . ': ' . $value);
         }
         return false;
       }
       //if(strstr($data, 'OK')===false){
       if(!is_array($data) && strstr($data, 'OK')===false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Write stove request FAILED: ' . $return);
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Write stove request FAILED: ' . $return);
         return false;
       }
       return true ;
     }
 
     private function rikaLogout($cookieFile=''){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
 
       //$url=$this->getStoveBrandUrlLogout($this->getConfiguration('stovebrand'));
       $url=$this->getStoveBrandUrl($this->getConfiguration('stovebrand') , 'urllogout' );
       if($url===false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' getStoveBrandUrl(urllogout) FAILED');
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' getStoveBrandUrl(urllogout) FAILED');
         //$url='https://www.rika-firenet.com/web/logout';
         $url=$this->getStoveBrandUrl( 0 , 'urllogout');
         #return false;
@@ -2470,9 +2446,9 @@ class rikaha extends eqLogic {
       curl_close($ch);
 
       if($curl_errno > 0){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' FAILED rikaLogout URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' FAILED rikaLogout URL: \''.$url.'\' errno: '.$curl_errno.' error: '.$curl_error);
         foreach ($curl_info as $key => $value) {
-          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' .  $key . ': ' . $value);
+          log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' ' .  $key . ': ' . $value);
         }
         return false;
       }
@@ -2481,59 +2457,59 @@ class rikaha extends eqLogic {
     }
 
     private function readJsonFile($jsonFile,&$stovedata=""){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
 
       if(is_file($jsonFile)===false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' File not found: '.$jsonFile);
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' File not found: '.$jsonFile);
         return false;
       }
 
       if(is_readable($jsonFile)===false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' File not readable: '.$jsonFile);
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' File not readable: '.$jsonFile);
         return false;
       }
 
       $data=file_get_contents($jsonFile);
       if($data===false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to read json file: '.$jsonFile);
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Failed to read json file: '.$jsonFile);
         return false;
       }
 
       $stovedata=json_decode($data, true);
       if(json_last_error()===JSON_ERROR_NONE){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Decode json OK');
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Decode json OK');
         return true;
       }
       $stovedata="";
 
       $data=trim(strip_tags($data));
       if(strstr($data, 'is not registered for user')!==false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data Check your stove number (raw data: '.$data.')');
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Failed to get stove data Check your stove number (raw data: '.$data.')');
         return false;
       }elseif(strstr($data, 'Rika Application Error')!==false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data Rika Application Error (raw data: '.$data.')');
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Failed to get stove data Rika Application Error (raw data: '.$data.')');
         return false;
       }elseif(strstr($data, 'Authorisation required')!==false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data Authorisation required (raw data: '.$data.')');
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Failed to get stove data Authorisation required (raw data: '.$data.')');
         $stovedata='Authorisation required';
         return false;
       }else{
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Failed to get stove data (raw data: '.$data.')');
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Failed to get stove data (raw data: '.$data.')');
         return false;
       }
     }
 
     private function checkCookie($cookieFile){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
 
       if(is_file($cookieFile)===false){
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' File not found: '.$cookieFile);
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' File not found: '.$cookieFile);
         return false;
       }
 
       $fileContent=file($cookieFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
       if ($fileContent === false) {
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Unable to read file: '.$cookieFile);
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Unable to read file: '.$cookieFile);
         $this->cleanCookieFile($cookieFile);
         return false;
       }
@@ -2543,13 +2519,13 @@ class rikaha extends eqLogic {
         $fileContent[$i] = trim($fileContent[$i]);
         $cookieData = array_map('trim', explode("\t", $fileContent[$i], 7));
         if (count($cookieData) !== 7) {
-          //log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Missing cookie data');
+          //log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Missing cookie data');
           continue;
         }
         if (substr($cookieData[0], 0, 10) == '#HttpOnly_') {
           $cookieInfo['domain']=substr($cookieData[0], 10);
         }else{
-          //log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' No httpOnly prefix');
+          //log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' No httpOnly prefix');
           continue;
         }
         $cookieInfo['flag']=$cookieData[1];
@@ -2560,7 +2536,7 @@ class rikaha extends eqLogic {
         $cookieInfo['value']=$cookieData[6];
       }
       foreach ($cookieInfo as $key => $value) {
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' .  $key . ': ' . $value);
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' ' .  $key . ': ' . $value);
       }
       if(count($cookieInfo)!=7){
         $this->cleanCookieFile($cookieFile);
@@ -2576,22 +2552,22 @@ class rikaha extends eqLogic {
       }
       $compExpire=($cookieInfo['expire']-600);
       $compTime=time();
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Expire if '.$compExpire.'<'.$compTime);
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Expire if '.$compExpire.'<'.$compTime);
       if((int)$compExpire<(int)$compTime){
         $this->cleanCookieFile($cookieFile);
         return false;
       }
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Cookie is ok');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Cookie is ok');
       return true;
     }
 
     private function getUA(){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
       return "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:69.0) Gecko/20100101 Firefox/69.0";
     }
 
     private function translateSubTypeBinary($value=''){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called params: '.$value);
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called params: '.$value);
 
       $translate=$value;
       if($value==0){
@@ -2604,7 +2580,7 @@ class rikaha extends eqLogic {
     }
 
     private function translateConvectionFan1Level($value=''){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called params: '.$value);
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called params: '.$value);
 
       $translate='';
       if($value==0){
@@ -2617,7 +2593,7 @@ class rikaha extends eqLogic {
     }
 
     private function translateOperatingMode($value=''){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called params: '.$value);
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called params: '.$value);
 
       $translate='';
       switch ($value) {
@@ -2637,7 +2613,7 @@ class rikaha extends eqLogic {
     }
 
     private function translateStatus($statusMainState, $statusSubState){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called params: '.$statusMainState. ' & '.$statusSubState);
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called params: '.$statusMainState. ' & '.$statusSubState);
 
       $translate='';
       switch ($statusMainState) {
@@ -2699,7 +2675,7 @@ class rikaha extends eqLogic {
     }
 
     private function translateUptime($value=0){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
 
       $conv = array(86400,3600,60,1);
       $result = array(0,0,0,0);
@@ -2715,20 +2691,20 @@ class rikaha extends eqLogic {
     }
 
     private function inRange($val, $min, $max){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
       return ($val >= $min && $val <= $max);
     }
 
     private function cmdSave($cmd, $data){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
       if(is_bool($data)===true){
         if($data===true){
-          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' . $cmd . ' true');
+          log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' ' . $cmd . ' true');
         }else{
-          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' . $cmd . ' false');
+          log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' ' . $cmd . ' false');
         }
       }else{
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' ' . $cmd . ' ' . $data);
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' ' . $cmd . ' ' . $data);
       }
 
       $name = $this->getCmd(null, $cmd);
@@ -2752,7 +2728,7 @@ class rikaha extends eqLogic {
     }
 
     public function getInfo(){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
 
       $cookieFile=jeedom::getTmpFolder('rikaha').'/rikaha_cookies_'.$this->getId();
       $jsonFile=jeedom::getTmpFolder('rikaha').'/rikaha_json_'.uniqid().'.json';
@@ -2813,19 +2789,19 @@ class rikaha extends eqLogic {
       $inputDoor  = true;
       foreach ($stoveStructure as $key => $value) {
         if(substr($key, 0, 6)=='local_'){
-          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' '. $key . ' skiped');
+          log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' '. $key . ' skiped');
           continue;
         }
         $stoveValue=__('Not set',__FILE__);
         if($value['parent']=='0'){
-          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' NO parent found');
+          log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' NO parent found');
 
           if(array_key_exists($key, $stovedata)===true){
             $stoveValue=$stovedata[$key];
             $this->cmdSave($value['id'], $stoveValue);
           }
         }else{
-          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' parent found: '. $value['parent']);
+          log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' parent found: '. $value['parent']);
 
           if(array_key_exists($value['parent'], $stovedata)===true){
             if(array_key_exists($key, $stovedata[$value['parent']])===true){
@@ -2881,7 +2857,7 @@ class rikaha extends eqLogic {
     }
 
     public function setStove($stovekey='', $_options=array()){
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called stovekey: ' . $stovekey . ' _options: '. json_encode($_options));
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called stovekey: ' . $stovekey . ' _options: '. json_encode($_options));
 
       $stoveStructure=array(
         'operatingMode'                 => '',
@@ -2903,7 +2879,7 @@ class rikaha extends eqLogic {
 
       // Check value
       if(array_key_exists($stovekey, $stoveStructure)===false){
-        log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' key: '. $stovekey .' not found in allowed structure');
+        log::add('rikaha', 'debug',  __METHOD__.'(ln '.__LINE__.')'.' key: '. $stovekey .' not found in allowed structure');
         throw new Exception(__('Action impossible à réaliser sur votre poêle, merci de consulter vos logs en mode debug',__FILE__));
       }
 
@@ -2956,7 +2932,7 @@ class rikaha extends eqLogic {
       // final check
       foreach ($stoveStructure as $key => $value) {
         if(trim($value)==''){
-          log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' key: '. $stovekey .' is not set');
+          log::add('rikaha', 'debug',  __METHOD__.'(ln '.__LINE__.')'.' key: '. $stovekey .' is not set');
           throw new Exception(__('Des données sont manquantes afin de realiser cette action sur votre poêle, merci de consulter vos logs en mode debug',__FILE__));
         }
       }
@@ -2999,26 +2975,26 @@ class rikaha extends eqLogic {
             #$start = date("Y-m-d H:i:s", $startUT);
             $start = $local_tankLevel->getValueDate();
             $end = date("Y-m-d H:i:s", $endUT);
-            log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' start: ' . $start);
-            log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' end: ' . $end);
+            log::add('rikaha', 'debug',  __METHOD__.'(ln '.__LINE__.')'.' start: ' . $start);
+            log::add('rikaha', 'debug',  __METHOD__.'(ln '.__LINE__.')'.' end: ' . $end);
 
             $parameterFeedRateTotal=$this->getCmd(null,'parameterFeedRateTotal');
             if(is_object($parameterFeedRateTotal)){
               $currentCons=$parameterFeedRateTotal->execCmd();
-              log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' current value: ' . $currentCons);
+              log::add('rikaha', 'debug',  __METHOD__.'(ln '.__LINE__.')'.' current value: ' . $currentCons);
 
               $histovalue=$parameterFeedRateTotal->getHistory($start, $end) ;
               $targetIndex=count($histovalue)-2;
               if($targetIndex>-1){
                 $previusCons=$histovalue[$targetIndex]->getValue();
-                log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' previus value: ' . $previusCons);
+                log::add('rikaha', 'debug',  __METHOD__.'(ln '.__LINE__.')'.' previus value: ' . $previusCons);
 
                 $cons=$currentCons-$previusCons;
                 if($cons>0){
                   //Correction de la conso
                   if($this->getConfiguration('correctionrate')!=0){
                     $fixcons=1+($this->getConfiguration('correctionrate')/100);
-                    log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' Correct conso: ' . $fixcons);
+                    log::add('rikaha', 'debug',  __METHOD__.'(ln '.__LINE__.')'.' Correct conso: ' . $fixcons);
                     $cons=$cons*$fixcons;
                   }
 
@@ -3029,11 +3005,11 @@ class rikaha extends eqLogic {
                     $newTankLevel=number_format($newTankLevel, 2, '.', '');
                   }
                   $this->cmdSave('local_tankLevel', $newTankLevel);
-                  log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' Current tank level: '.$currentTankLevel);
-                  log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' New tank level: '.$newTankLevel);
+                  log::add('rikaha', 'debug',  __METHOD__.'(ln '.__LINE__.')'.' Current tank level: '.$currentTankLevel);
+                  log::add('rikaha', 'debug',  __METHOD__.'(ln '.__LINE__.')'.' New tank level: '.$newTankLevel);
                 }
               }else{
-                log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' Not enough history tu calc consumption');
+                log::add('rikaha', 'debug',  __METHOD__.'(ln '.__LINE__.')'.' Not enough history tu calc consumption');
               }
             }
           }
@@ -3100,12 +3076,12 @@ class rikaha extends eqLogic {
     }
 
     public function postUpdate() {
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
       $this->getStoveStructure($stoveStructure);
 
       $newObj=0;
       foreach ($stoveStructure as $key => $value) {
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln: '.$value['name'].' in process');
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' '.$value['name'].' in process');
 
         $rikahaCmd = $this->getCmd(null, $value['id']);
         if (!is_object($rikahaCmd)){
@@ -3121,7 +3097,7 @@ class rikaha extends eqLogic {
           }
 
           $newObj++;
-          log::add('rikaha', 'debug', __FUNCTION__ . '()-ln: '.$value['name'].' created');
+          log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' '.$value['name'].' created');
         }
 
         $rikahaCmd->setEqLogic_id($this->id);
@@ -3138,7 +3114,7 @@ class rikaha extends eqLogic {
         }
 
         $rikahaCmd->save();
-        log::add('rikaha', 'debug', __FUNCTION__ . '()-ln: '.$value['name'].' saved');
+        log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' '.$value['name'].' saved');
         unset($rikahaCmd);
       }
       unset($value);
@@ -3176,7 +3152,7 @@ class rikaha extends eqLogic {
     ));
 
     public function HtmlBuildOptions($data=array(), $selected=''){
-      //log::add('rikaha', 'debug', __FUNCTION__ . '()-ln: '.$selected.' selected value');
+      //log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' '.$selected.' selected value');
       $SO='<option value="...">...</option>';
       for($i=0;$i<count($data);$i++){
         if(trim($selected)==trim($data[$i]['value'])){
@@ -3186,12 +3162,12 @@ class rikaha extends eqLogic {
         $SO.='<option value="'.$data[$i]['value'].'">'.$data[$i]['label'].'</option>';
       }
 
-      //log::add('rikaha', 'debug', __FUNCTION__ . '()-ln: '.$SO);
+      //log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' '.$SO);
       return $SO;
     }
 
     public function toHtml($_version = 'dashboard') {
-      log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Called');
+      log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Called');
 
       // step 1 get data
       $stoveStructure=array();
@@ -3277,7 +3253,7 @@ class rikaha extends eqLogic {
               $needed_value=$needed_cmd->execCmd();
               $needed_unite=$needed_cmd->getUnite();
             }else{
-              log::add('rikaha', 'debug', __FUNCTION__ . '()-ln:'.__LINE__.' Needed logicalid not obj found: ' . $needed_logicalid );
+              log::add('rikaha', 'debug', __METHOD__.'(ln '.__LINE__.')'.' Needed logicalid not obj found: ' . $needed_logicalid );
             }
             unset($needed_cmd);
           }
@@ -3578,8 +3554,8 @@ class rikahaCmd extends cmd {
     public static $_widgetPossibility = array('custom' => true);
 
     public function execute($_options = array()) {
-      log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' LogicalId: '. $this->getLogicalId());
-      log::add('rikaha', 'debug',  __FUNCTION__ . '()-ln:'.__LINE__.' options: '. json_encode($_options));
+      log::add('rikaha', 'debug',  __METHOD__.'(ln '.__LINE__.')'.' LogicalId: '. $this->getLogicalId());
+      log::add('rikaha', 'debug',  __METHOD__.'(ln '.__LINE__.')'.' options: '. json_encode($_options));
 
       if ( $this->GetType = "action" ){
         log::add('rikaha', 'debug',   $this->getConfiguration('actionCmd'));
