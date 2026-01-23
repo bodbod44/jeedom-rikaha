@@ -4,6 +4,9 @@ Vous retrouverez le détail complet des mises à jour sur https://github.com/bod
 
 Liste des évolutions majeures de la version courante :
 
+# 23/01/2026 (beta)
+- Ajout des choix 1min et 2min pour la fréquence de rafraichissement
+
 # 04/01/2026 (beta)
 - Optimisation et agrégation des 3 fonctions getStoveBrandUrl*
 - Vérification que l'équipement est bien activé dans jeedom pour aller récupérer la mise à jour des données

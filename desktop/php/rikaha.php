@@ -170,6 +170,8 @@ $eqLogics = eqLogic::byType($plugin->getId());
 							<div class="col-md-8">
 								<select class="eqLogicAttr" data-l1key="configuration" data-l2key="Freq_value" title="Fréquence de rafaichissement des statuts depuis le cloud (10 min par défaut)"  style="width:100px;">
 									<option value="0">Off</option>
+									<option value="1">1 min</option>
+									<option value="2">2 min</option>
 									<option value="5">5 min</option>
 									<option value="10">10 min</option>
 									<option value="15">15 min</option>
